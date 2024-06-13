@@ -21,57 +21,77 @@ RSpec.describe 'Advanced Nested Collections' do
     expect(employees).to eq(expected)
   end
 
-  xit 'test 2' do
+  it 'test 2' do
     # Find the ingredients for pancakes
-    pancake_ingredients = _____
+    pancake_ingredients = stores[:dennys][:dishes].first[:ingredients]
+
 
     expected = ["Flour", "Eggs", "Milk", "Syrup"]
     expect(pancake_ingredients).to eq(expected)
   end
 
-  xit 'test 3' do
+  it 'test 3' do
+
     # Find the price of risotto
-    risotto_price = ____
+    risotto_price = stores[:olive_garden][:dishes][0][:price]
 
     expect(risotto_price).to eq(12)
   end
 
-  xit 'test 4' do
+  it 'test 4' do
     # Find the ingredients for a Big Mac
-    big_mac_ingredients = ____
+    big_mac_ingredients = stores[:macdonalds][:dishes][0][:ingredients]
 
     expected = ['Bun','Hamburger','Ketchup','pickles']
     expect(big_mac_ingredients).to eq(expected)
   end
 
-  xit 'test 5' do
-    # Find a list of restaurants
-    store_names = ____
+  it 'test 5' do
 
+    
+    
+    # Find a list of restaurants
+    store_names = stores.keys
+    
     expected = [:olive_garden, :dennys, :macdonalds]
     expect(store_names).to eq(expected)
-  end
+    end
+    
+    it 'test 6' do
+      # Find dishes names for Olive Garden
+      dishes_names = stores[:olive_garden][:dishes].map {|dish| dish[:name]}
+      
+      expect(dishes_names).to eq(['Risotto', 'Steak'])
+      end
 
-  xit 'test 6' do
-    # Find dishes names for Olive Garden
-    dishes_names = ____
-
-    expect(dishes_names).to eq(['Risotto', 'Steak'])
-  end
-
-  xit 'test 7' do
+  it 'test 7' do
     # Return a list of employees across
     # all restaurants
-    employee_names = ____
+    employee_names=[]
+    stores.each do |k,v|
+      employee_names << v[:employees]
+    end
+    # require 'pry';binding.pry
+
+    employee_names = employee_names.flatten
 
     expected = ["Jeff", "Zach", "Samantha", "Bob", "Sue", "James", "Alvin", "Simon", "Theodore"]
     expect(employee_names).to eq(expected)
   end
 
-  xit 'test 8' do
+  it 'test 8' do
     # Return a list of all ingredients
     # across all restaurants
-    ingredients = ____
+
+    ingredients = []
+    stores.each_pair do |store, data|
+      data[:dishes].each do |dish|
+        ingredients.concat(dish[:ingredients])
+      end
+    end
+
+
+
 
     expected = [
       "Rice",
