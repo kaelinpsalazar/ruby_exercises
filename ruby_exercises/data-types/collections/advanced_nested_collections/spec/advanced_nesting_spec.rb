@@ -116,17 +116,23 @@ RSpec.describe 'Advanced Nested Collections' do
     expect(ingredients).to eq(expected)
   end
 
-  xit 'test 9' do
+  it 'test 9' do
     # Return the full menu price for Olive Garden
-    full_menu_price = ____
+    full_menu_price = 0
+    stores[:olive_garden][:dishes].each do |dish|
+
+      full_menu_price += dish[:price]
+    end
 
     expect(full_menu_price).to eq(27)
   end
 
-  xit 'test 10' do
+  it 'test 10' do
     # Return the full menu for Olive Garden
 
-    olive_garden_menu = _____
+    olive_garden_menu = stores[:olive_garden][:dishes]
+        # require 'pry';binding.pry
+
     
     expected = {
       "Risotto" => {
@@ -143,7 +149,7 @@ RSpec.describe 'Advanced Nested Collections' do
     expect(olive_garden_menu).to eq(expected)
   end
 
-  xit 'test 11' do
+  it 'test 11' do
     # Return a full menu across all restaurants
     full_menu = ____
 
